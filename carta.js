@@ -1,11 +1,7 @@
 /* =====================================================================
    Panadero de Eugui · carta y datos compartidos (portada + pedidos)
-   MODO LOCAL (hoy): la carta está escrita aquí abajo y las fotos en imagenes.js.
-   MODO SERVIDOR: poned en CONFIG.api la dirección del servidor de la app
-   (p. ej. 'https://api.elpanaderodeeugui.com'). La web cargará entonces la carta,
-   los locales y la configuración de GET /api/carta y GET /api/locales, guardará
-   los pedidos con POST /api/pedidos y cobrará con Redsys. Lo de abajo queda solo
-   como respaldo para desarrollo.
+   Cambia aquí productos, precios, locales y horarios.
+   Necesita imagenes.js cargado antes (define IMG).
    ===================================================================== */
 
 const CONFIG = {
@@ -16,7 +12,8 @@ const CONFIG = {
   regaloTexto: 'una botella de Pagos de Araiz roble 2018',
   telefonoPedidos: '948 33 09 13',
   appNombre: 'la app del Panadero de Eugui',
-  api: null                       // dirección del servidor de la app; null = modo local
+  urlCrearPago: null,             // backend de la pasarela (Redsys / Stripe / Bizum)
+  urlGuardarPedido: null          // endpoint donde guardar pedidos
 };
 
 const LOCALES = [
@@ -107,16 +104,6 @@ const PRODUCTOS = [
   {id:'bo1',cat:'regalo',n:'Bono desayuno individual',d:'Un desayuno completo para canjear en cualquier local.',p:8.00,img:'desayuno-jamon'},
   {id:'bo2',cat:'regalo',n:'Bono desayuno para dos',d:'Para compartir sin prisas.',p:15.00,img:'tostadas'}
 ];
-/* Pan para hostelería: solo lo ven los clientes registrados (ver clientes.js). Precios ORIENTATIVOS. */
-CATEGORIAS.splice(0, 0, {id:'hosteleria', nombre:'Pan para hostelería', desc:'Pedidos de pan para restaurantes y bares, con reparto a domicilio. Solo clientes registrados.', soloClientes:true});
-PRODUCTOS.push(
-  {id:'h1',cat:'hosteleria',n:'Barra de masa madre',d:'La barra de siempre, 250 g. En cajas para hostelería.',img:'barras',o:[{n:'Caja 25 uds.',p:30.00},{n:'Caja 50 uds.',p:58.00}]},
-  {id:'h2',cat:'hosteleria',n:'Baguette',d:'Fina y crujiente, ideal para bocadillos.',img:'hero-pan',o:[{n:'Caja 20 uds.',p:24.00},{n:'Caja 40 uds.',p:46.00}]},
-  {id:'h3',cat:'hosteleria',n:'Panecillos de mesa',d:'Para acompañar el menú. 40 g la pieza.',img:'w-semillas',o:[{n:'Bolsa 50 uds.',p:17.50},{n:'Bolsa 100 uds.',p:33.00}]},
-  {id:'h4',cat:'hosteleria',n:'Torta rústica para tostas',d:'Hogaza de fermentación lenta, 1 kg. Se puede pedir cortada.',img:'w-hogaza',o:[{n:'Entera',p:6.50},{n:'Cortada',p:6.80}]},
-  {id:'h5',cat:'hosteleria',n:'Pan integral de molde',d:'Para sándwiches y desayunos.',img:'w-integral',o:[{n:'1 ud.',p:4.20},{n:'Caja 6 uds.',p:24.00}]}
-);
-
 const NOTAS_LLEVAR = 'Raciones de 250 g aproximadamente. El producto envasado tiene un incremento de 1 € sobre el precio de tarifa. Precios sujetos a posibles variaciones.';
 
 
@@ -127,41 +114,7 @@ const CREDITOS_FOTOS = 'Algunas fotos de platos son de ejemplo, de Unsplash (lic
 const eur = n => n.toFixed(2).replace('.',',')+' €';
 const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const prod = id => PRODUCTOS.find(p => p.id === id);
-const img = k => !k ? '' : /^(https?:|data:|\/)/.test(k) ? k : ((typeof IMG!=='undefined' && IMG[k]) || '');
-
-/* ---------- alérgenos (Reglamento UE 1169/2011) ---------- */
-const ALERGENOS = {
-  gluten:'Gluten', crustaceos:'Crustáceos', huevo:'Huevo', pescado:'Pescado', cacahuetes:'Cacahuetes',
-  soja:'Soja', leche:'Leche', frutos_cascara:'Frutos de cáscara', apio:'Apio', mostaza:'Mostaza',
-  sesamo:'Sésamo', sulfitos:'Sulfitos', altramuces:'Altramuces', moluscos:'Moluscos'
-};
-const textoAlergenos = p => Array.isArray(p.alergenos)
-  ? (p.alergenos.length ? 'Contiene: ' + p.alergenos.map(a => ALERGENOS[a] || a).join(', ') : 'Sin alérgenos declarados')
-  : 'Alérgenos: consúltalos en el local';
-
-/* ---------- servidor de la app ---------- */
-function cabecerasApi(){
-  const h = {'Content-Type':'application/json'};
-  try { const c = JSON.parse(localStorage.getItem('eugui_cliente')||'null'); if (c && c.token) h.Authorization = 'Bearer ' + c.token; } catch(e){}
-  return h;
-}
-async function api(ruta, opciones={}){
-  const r = await fetch(CONFIG.api.replace(/\/$/,'') + ruta, {...opciones, headers:{...cabecerasApi(), ...(opciones.headers||{})}});
-  let datos = null; try { datos = await r.json(); } catch(e){}
-  if (!r.ok) { const err = new Error((datos && datos.mensaje) || 'Error del servidor ('+r.status+')'); err.status = r.status; err.datos = datos; throw err; }
-  return datos;
-}
-let CARTA_ERROR = null;
-async function cargarCarta(){
-  if (!CONFIG.api) return;
-  try {
-    const [carta, locales] = await Promise.all([api('/api/carta'), api('/api/locales')]);
-    Object.assign(CONFIG, carta.config || {});
-    CATEGORIAS.splice(0, CATEGORIAS.length, ...(carta.categorias || []));
-    PRODUCTOS.splice(0, PRODUCTOS.length, ...(carta.productos || []));
-    LOCALES.splice(0, LOCALES.length, ...(locales || []));
-  } catch(e){ CARTA_ERROR = e; console.error('No se pudo cargar la carta', e); }
-}
+const img = k => (k && IMG[k]) || '';
 
 /* ---------- cesta compartida (clave "id" o "id~opción") ---------- */
 let cesta = {};
@@ -171,7 +124,7 @@ const lineaInfo = key => {
   if (p.o){ const o = p.o[+oi]; if (!o) return null; return {key, p, nombre:p.n, opcion:o.n, precio:o.p}; }
   return {key, p, nombre:p.n, opcion:'', precio:p.p};
 };
-function limpiarCesta(){ Object.keys(cesta).forEach(k => { if (!lineaInfo(k) || !(cesta[k] > 0)) delete cesta[k]; }); }
+Object.keys(cesta).forEach(k => { if (!lineaInfo(k) || !(cesta[k] > 0)) delete cesta[k]; });
 const guardarCesta = () => { try { localStorage.setItem('eugui_cesta', JSON.stringify(cesta)); } catch(e){} };
 const lineas = () => Object.keys(cesta).map(k => ({...lineaInfo(k), q:cesta[k]}));
 const nCesta = () => Object.values(cesta).reduce((a,b)=>a+b,0);
@@ -182,6 +135,3 @@ function sumar(key, d){
   if (q <= 0) delete cesta[key]; else cesta[key] = Math.min(q, 99);
   guardarCesta();
 }
-
-/* La carta está lista (local o del servidor). Las páginas pintan después de esto. */
-const cargaLista = cargarCarta().then(() => { limpiarCesta(); });
