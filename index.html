@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panadero de Eugui · Familia de panaderos desde 1927</title>
+<meta name="description" content="Pan de masa madre, repostería, cafetería y comida para llevar en Pamplona y Huarte. Haz tu pedido online y recógelo en tu tienda.">
+<link rel="stylesheet" href="fuentes.css?v=20261023b">
+<style>
+:root{
+  --negro:#1f1a16; --negro-2:#2a231d; --oro:#b08551; --oro-osc:#8a6436;
+  --papel:#f5eee2; --papel-2:#ebe1d0; --texto:#2b241e; --texto-suave:#5e5248;
+  --blanco:#fffdf9; --ok:#3f6b3a; --radio:10px;
+  --sombra:0 10px 30px rgba(31,26,22,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--papel);color:var(--texto);font:17px/1.6 Lora,Georgia,serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Oswald,Arial Narrow,sans-serif;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1.15;margin:0 0 .4em}
+.script{font-family:"Great Vibes",cursive;text-transform:none;letter-spacing:0;font-weight:400;color:var(--oro)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px;top:0;background:var(--oro);color:#fff;padding:10px 16px;z-index:999}
+.skip:focus{left:10px;top:10px}
+:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:0;cursor:pointer;font:500 15px/1 Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:16px 26px;border-radius:999px;background:var(--oro);color:#fff;text-decoration:none;transition:background .2s,transform .2s}
+.btn:hover{background:var(--oro-osc);transform:translateY(-1px)}
+.btn.sec{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn.sec:hover{background:rgba(255,255,255,.08)}
+.btn.osc{background:var(--negro)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* Cabecera */
+header.top{position:sticky;top:0;z-index:50;background:var(--negro);color:var(--papel);border-bottom:3px solid var(--oro)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:78px}
+.logo img{height:62px;width:auto}
+nav.menu{display:flex;gap:22px;margin-left:auto}
+nav.menu a{font:500 14px Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;opacity:.85}
+nav.menu a:hover{opacity:1;color:var(--oro)}
+.carrito-btn{position:relative;background:none;border:2px solid var(--oro);color:var(--papel);border-radius:999px;padding:9px 16px;font:500 14px Oswald,sans-serif;letter-spacing:.1em;cursor:pointer;display:flex;gap:8px;align-items:center}
+.carrito-btn .n{background:var(--oro);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px}
+.hamb{display:none;background:none;border:0;color:var(--papel);font-size:28px;cursor:pointer}
+
+/* Hero */
+.hero{position:relative;min-height:min(86vh,720px);display:grid;align-items:center;color:var(--blanco);overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,16,13,.85) 0%,rgba(20,16,13,.55) 55%,rgba(20,16,13,.2) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-top:60px;padding-bottom:140px}
+@media (max-width:600px){.hero .wrap{padding-bottom:90px}}
+.hero .script{font-size:clamp(34px,5vw,56px);display:block;margin-bottom:6px}
+.hero h1{font-size:clamp(40px,7vw,86px);font-weight:600;max-width:11ch;letter-spacing:.03em}
+.hero p{max-width:520px;font-size:19px;margin:0 0 28px;color:#efe6d8}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero .sello{display:flex;gap:26px;margin-top:38px;font:500 13px Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#e6d7c1;flex-wrap:wrap}
+.hero .sello span:before{content:"✦ ";color:var(--oro)}
+
+/* Accesos tipo Coffing */
+.accesos{margin-top:-70px;position:relative;z-index:2}
+.accesos .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.acceso{background:var(--blanco);border-radius:var(--radio);box-shadow:var(--sombra);display:flex;align-items:center;gap:16px;padding:14px 20px 14px 14px;text-decoration:none;border:0;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .2s}
+.acceso:hover{transform:translateY(-3px)}
+.acceso img{width:72px;height:72px;border-radius:8px;object-fit:cover}
+.acceso b{display:block;font:500 17px Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.acceso small{color:var(--texto-suave);font-size:14px}
+.acceso .fl{margin-left:auto;font-size:22px;color:var(--oro)}
+
+section{padding:90px 0}
+.titulo{text-align:center;margin-bottom:46px}
+.titulo .script{font-size:42px;display:block;line-height:1}
+.titulo h2{font-size:clamp(28px,4vw,44px)}
+.titulo p{max-width:640px;margin:8px auto 0;color:var(--texto-suave)}
+.adorno{width:120px;height:14px;margin:10px auto 0;background:radial-gradient(circle,var(--oro) 3px,transparent 4px) center/14px 14px no-repeat,linear-gradient(var(--oro),var(--oro)) left center/48px 1px no-repeat,linear-gradient(var(--oro),var(--oro)) right center/48px 1px no-repeat}
+
+/* Cómo funciona */
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:p}
+.paso{background:var(--blanco);border-radius:var(--radio);padding:26px;border-top:4px solid var(--oro)}
+.paso:before{counter-increment:p;content:counter(p);font:600 42px Oswald;color:var(--oro);display:block;line-height:1;margin-bottom:8px}
+.paso h3{font-size:18px}
+.paso p{margin:0;color:var(--texto-suave);font-size:15px}
+
+/* Secciones de producto */
+.bloques{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.bloque{position:relative;border-radius:var(--radio);overflow:hidden;aspect-ratio:3/4;color:#fff;text-decoration:none;background:#000;cursor:pointer;border:0;padding:0;font:inherit;text-align:left}
+.bloque img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s;opacity:.85}
+.bloque:hover img{transform:scale(1.05);opacity:.7}
+.bloque div{position:absolute;inset:auto 0 0 0;padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.bloque h3{font-size:22px;margin:0}
+.bloque p{margin:4px 0 10px;font-size:14px;color:#eadfcd}
+.bloque span{font:500 13px Oswald;letter-spacing:.14em;text-transform:uppercase;color:var(--oro)}
+
+/* Historia */
+.historia{background:var(--negro);color:var(--papel)}
+.historia .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.historia img{border-radius:var(--radio);box-shadow:var(--sombra)}
+.historia p{color:#d9cdbb}
+.historia .script{font-size:44px}
+
+/* Catálogo destacado */
+.destacados{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.prod{background:var(--blanco);border-radius:var(--radio);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.prod img{aspect-ratio:1;object-fit:cover;width:100%}
+.prod .c{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.prod h3{font-size:16px;margin:0}
+.prod p{margin:0;font-size:14px;color:var(--texto-suave);flex:1}
+.prod .pie{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.precio{font:600 19px Oswald;color:var(--oro-osc)}
+.add{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:9px 16px;font:500 13px Oswald;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.add:hover{background:var(--oro)}
+
+/* Locales */
+.locales{background:var(--papel-2)}
+.locs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.loc{background:var(--blanco);border-radius:var(--radio);overflow:hidden}
+.loc img{aspect-ratio:3/2;object-fit:cover;width:100%}
+.loc .c{padding:18px}
+.loc h3{font-size:18px;margin-bottom:4px}
+.loc p{margin:0 0 4px;font-size:15px;color:var(--texto-suave)}
+
+/* Insta */
+.insta{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.insta img{aspect-ratio:1;object-fit:cover;width:100%}
+
+/* Bono */
+.bono{background:linear-gradient(rgba(31,26,22,.78),rgba(31,26,22,.78)),var(--bg) center/cover;color:var(--papel);text-align:center}
+.bono .script{font-size:46px}
+.bono p{max-width:560px;margin:0 auto 26px;color:#e6d9c5}
+
+footer{background:var(--negro);color:#cbbca6;padding:56px 0 30px;font-size:15px}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}
+footer h3{color:var(--papel);font-size:16px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--oro)}
+footer .legal{grid-column:1/-1;border-top:1px solid #3a3129;padding-top:20px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* ===== Tienda (flujo de pedido) ===== */
+.capa{position:fixed;inset:0;background:rgba(15,12,10,.6);z-index:80;display:none;align-items:center;justify-content:center;padding:16px}
+.capa.on{display:flex}
+.modal{background:var(--papel);border-radius:14px;max-width:620px;width:100%;max-height:92vh;overflow:auto;padding:34px;position:relative;box-shadow:var(--sombra)}
+.modal h2{font-size:24px}
+.cerrar{position:absolute;top:14px;right:14px;background:none;border:0;font-size:28px;cursor:pointer;color:var(--texto);width:44px;height:44px}
+.servicios{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.serv{background:var(--negro);color:var(--papel);border:0;border-radius:10px;padding:22px 14px;cursor:pointer;font:500 16px Oswald;letter-spacing:.06em;text-align:center}
+.serv .ico{font-size:28px;display:block;margin-bottom:6px}
+.serv small{display:block;font:400 13px Lora;color:#cdbfa9;margin-top:4px;letter-spacing:0}
+.serv:hover,.serv[aria-pressed=true]{background:var(--oro)}
+.lista-locales{display:grid;gap:10px;margin-top:16px}
+.opt{display:flex;gap:14px;align-items:center;background:var(--blanco);border:2px solid transparent;border-radius:10px;padding:10px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.opt img{width:64px;height:48px;object-fit:cover;border-radius:6px}
+.opt b{font:500 16px Oswald;letter-spacing:.05em}
+.opt small{display:block;color:var(--texto-suave)}
+.opt[aria-pressed=true],.opt:hover{border-color:var(--oro)}
+label{display:block;font:500 13px Oswald;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 6px}
+input,select,textarea{width:100%;font:16px Lora,serif;padding:12px 14px;border:1px solid #cdbfa9;border-radius:8px;background:var(--blanco);color:var(--texto)}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.horas{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.hora{border:1px solid #cdbfa9;background:var(--blanco);border-radius:999px;padding:8px 14px;cursor:pointer;font:15px Lora}
+.hora[aria-pressed=true]{background:var(--negro);color:#fff;border-color:var(--negro)}
+.aviso{font-size:14px;color:var(--texto-suave);margin-top:8px}
+.err{color:#a3321f;font-size:14px;margin-top:8px;min-height:1em}
+
+/* Página de pedido */
+#tienda{display:none;padding:0 0 120px;background:var(--papel)}
+body.modo-tienda #tienda{display:block}
+body.modo-tienda main.inicio{display:none}
+.barra-pedido{background:var(--negro-2);color:var(--papel);padding:14px 0;position:sticky;top:81px;z-index:40}
+.barra-pedido .wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:15px}
+.barra-pedido b{color:var(--oro);font-weight:600}
+.barra-pedido button{margin-left:auto;background:none;border:1px solid var(--oro);color:var(--papel);border-radius:999px;padding:6px 14px;cursor:pointer;font:14px Lora}
+.tienda-cab{padding:40px 0 10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 0 18px;position:sticky;top:137px;background:var(--papel);z-index:30}
+.tab{flex:none;border:1px solid var(--negro);background:transparent;border-radius:999px;padding:10px 18px;font:500 14px Oswald;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--negro)}
+.tab[aria-selected=true]{background:var(--negro);color:var(--papel)}
+.cat-tit{margin:34px 0 16px;font-size:26px;display:flex;align-items:center;gap:14px}
+.cat-tit:after{content:"";flex:1;height:1px;background:#cdbfa9}
+.lista-prod{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.cant{display:flex;align-items:center;gap:6px}
+.cant button{width:34px;height:34px;border-radius:50%;border:1px solid var(--negro);background:var(--blanco);cursor:pointer;font-size:18px;line-height:1}
+.cant span{min-width:22px;text-align:center;font:600 16px Oswald}
+
+/* Carrito */
+.panel{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--blanco);z-index:90;transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.2)}
+.panel.on{transform:none}
+.panel header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--papel-2)}
+.panel header h2{margin:0;font-size:22px}
+.items{flex:1;overflow:auto;padding:10px 22px}
+.item{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--papel-2)}
+.item img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+.item b{font:500 15px Oswald;letter-spacing:.04em}
+.item small{display:block;color:var(--texto-suave)}
+.panel footer{background:var(--papel);color:var(--texto);padding:20px 22px;display:block}
+.tot{display:flex;justify-content:space-between;margin:4px 0;font-size:15px}
+.tot.g{font:600 22px Oswald;margin:10px 0 14px}
+.vacio{text-align:center;color:var(--texto-suave);padding:50px 10px}
+.fondo-panel{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:85;display:none}
+.fondo-panel.on{display:block}
+.flotante{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;display:none;box-shadow:var(--sombra)}
+body.modo-tienda .flotante.hay{display:inline-flex}
+
+/* Checkout */
+.pagos{display:grid;gap:10px;margin-top:6px}
+.pago{display:flex;gap:12px;align-items:flex-start;background:var(--blanco);border:2px solid #e0d4c1;border-radius:10px;padding:14px;cursor:pointer}
+.pago input{width:auto;margin-top:5px}
+.pago.off{opacity:.55;cursor:not-allowed}
+.pago b{font:500 16px Oswald;letter-spacing:.05em}
+.pago small{display:block;color:var(--texto-suave)}
+.resumen{background:var(--blanco);border-radius:10px;padding:14px 16px;margin-top:16px;font-size:15px}
+.ok-ico{width:70px;height:70px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:36px;margin:0 auto 14px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-top:14px}
+.chk input{width:auto;margin-top:4px}
+
+@media (max-width:980px){
+  nav.menu{display:none;position:absolute;top:81px;left:0;right:0;background:var(--negro);flex-direction:column;padding:16px 20px;gap:14px}
+  nav.menu.on{display:flex}
+  .hamb{display:block}
+  .carrito-btn{margin-left:auto}
+  .accesos .grid,.bloques,.destacados{grid-template-columns:repeat(2,1fr)}
+  .pasos{grid-template-columns:repeat(2,1fr)}
+  .historia .wrap{grid-template-columns:1fr}
+  .insta{grid-template-columns:repeat(3,1fr)}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .top .wrap{height:68px}.logo img{height:52px}
+  nav.menu{top:71px}.barra-pedido{top:71px}.tabs{top:127px}
+  .accesos{margin-top:-40px}
+  .accesos .grid,.bloques,.destacados,.pasos{grid-template-columns:1fr}
+  .bloque{aspect-ratio:16/10}
+  .servicios,.fila{grid-template-columns:1fr}
+  .modal{padding:26px 18px}
+  section{padding:64px 0}
+  .carrito-btn .t{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Panadero de Eugui, inicio"><img data-img="logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Panadero de Eugui 1927"></a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="#" onclick="abrirPedido();return false">Hacer pedido</a>
+      <a href="#productos">Productos</a>
+      <a href="#nuestra-historia">Nuestra historia</a>
+      <a href="#contacto-locales">Locales</a>
+      <a href="#bonos-regalo">Bonos regalo</a>
+    </nav>
+    <button class="carrito-btn" onclick="abrirCarrito()" aria-label="Ver cesta"><span aria-hidden="true">🧺</span><span class="t">Cesta</span><span class="n" id="nCesta">0</span></button>
+    <button class="hamb" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" onclick="toggleMenu(this)">☰</button>
+  </div>
+</header>
+
+<div id="contenido"></div>
+<main class="inicio">
+  <section class="hero" style="padding:0">
+    <img data-img="hero-pan" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Cestas de pan de masa madre recién horneado en el obrador">
+    <div class="wrap">
+      <span class="script">Familia de panaderos desde 1927</span>
+      <h1>Pan de verdad, hecho cada día</h1>
+      <p>Pan de masa madre, repostería artesana, desayunos y comida casera para llevar. Pídelo online y recógelo en tu Panadero a la hora que quieras.</p>
+      <div class="ctas">
+        <button class="btn" onclick="abrirPedido()">Haz tu pedido</button>
+        <a class="btn sec" href="#contacto-locales">Ver locales</a>
+      </div>
+      <div class="sello"><span>Masa madre</span><span>Obrador propio</span><span>5 locales en Pamplona y Huarte</span></div>
+    </div>
+  </section>
+
+  <div class="accesos"><div class="wrap"><div class="grid">
+    <button class="acceso" onclick="abrirPedido('desayunos')"><img data-img="desayuno-jamon" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt=""><span><b>Desayunos y cafetería</b><small>Tostadas, bocadillos, café</small></span><span class="fl" aria-hidden="true">›</span></button>
+    <button class="acceso" onclick="abrirPedido('reposteria')"><img data-img="vitrina-dulces" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt=""><span><b>Repostería y tartas</b><small>Para celebrar o darte un gusto</small></span><span class="fl" aria-hidden="true">›</span></button>
+    <button class="acceso" onclick="abrirPedido('llevar')"><img data-img="tortilla" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt=""><span><b>Comida para llevar</b><small>Asados, menús y cocinados</small></span><span class="fl" aria-hidden="true">›</span></button>
+  </div></div></div>
+
+  <section>
+    <div class="wrap">
+      <div class="titulo"><span class="script">Así de fácil</span><h2>Tu pedido en 4 pasos</h2><div class="adorno"></div></div>
+      <div class="pasos">
+        <div class="paso"><h3>Elige qué</h3><p>Pan, bollería, tartas, desayunos y platos de nuestro asador: menús, asados y cocinados.</p></div>
+        <div class="paso"><h3>Elige dónde y cuándo</h3><p>Recógelo en tu local, hoy o el día que quieras, a la hora que mejor te venga.</p></div>
+        <div class="paso"><h3>Llena la cesta</h3><p>Añade lo que quieras. Por compras de más de 110 € te regalamos una botella de vino.</p></div>
+        <div class="paso"><h3>Paga y listo</h3><p>Pago online seguro o al recoger. Te avisamos cuando esté preparado.</p></div>
+      </div>
+      <p class="aviso" style="text-align:center;margin-top:22px">🔒 El reparto a domicilio es solo para clientes registrados, con alta desde la app del Panadero de Eugui.</p>
+      <div hidden>
+      </div>
+    </div>
+  </section>
+
+  <section id="obrador" style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo"><span class="script">Mucho más que una panadería</span><h2>Nuestro obrador</h2><div class="adorno"></div></div>
+      <div class="bloques">
+        <button class="bloque" onclick="location.hash='panaderia'"><img data-img="barras" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Barras de pan artesano en cestas de mimbre"><div><h3>Panadería</h3><p>Más de 10 variedades de masa madre, horneadas cada día.</p><span>Descúbrelos ›</span></div></button>
+        <button class="bloque" onclick="location.hash='cafeteria'"><img data-img="capuchino" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Capuchino con canela en taza de porcelana"><div><h3>Cafetería</h3><p>Un buen café o chocolate con algo dulce o salado.</p><span>Pide tu desayuno ›</span></div></button>
+        <button class="bloque" onclick="location.hash='reposteria'"><img data-img="cuajadas" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Postres caramelizados vistos desde arriba"><div><h3>Repostería</h3><p>El bocado dulce de cualquier celebración.</p><span>Date un placer ›</span></div></button>
+        <button class="bloque" onclick="location.hash='comida-para-llevar'"><img data-img="tostada-queso" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Tostada gratinada con queso azul"><div><h3>Para llevar</h3><p>Deja que cocinemos por ti: asados, menús y raciones.</p><span>Mira la carta ›</span></div></button>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo"><span class="script">Lo más pedido</span><h2>Favoritos de la casa</h2><div class="adorno"></div></div>
+      <div class="destacados" id="destacados"></div>
+      <p style="text-align:center;margin-top:30px"><button class="btn osc" onclick="abrirPedido()">Ver toda la carta</button></p>
+    </div>
+  </section>
+
+  <section class="historia" id="historia">
+    <div class="wrap">
+      <img data-img="cafetera" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Nuestro cafetero preparando café en la cafetera clásica de Carlos III">
+      <div>
+        <span class="script">Nuestra historia</span>
+        <h2>Cuatro generaciones de panaderos</h2>
+        <p>Desde 1927, en Eugui, nuestra familia amasa el pan como se ha hecho siempre: con masa madre, harinas de calidad y el tiempo que cada pieza necesita.</p>
+        <p>Un obrador que nunca duerme, hornos y fogones a pleno rendimiento para que cada mañana, tarde y noche puedas disfrutar de ese olor a pan recién hecho, ese tacto cálido y ese sabor a pan artesano y natural.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#nuestra-historia">Conoce nuestra historia</a><button class="btn sec" onclick="abrirPedido('pan')">Pide pan recién hecho</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="locales" id="locales">
+    <div class="wrap">
+      <div class="titulo"><span class="script">Ven a vernos</span><h2>Nuestros locales</h2><div class="adorno"></div><p>Recoge tu pedido en cualquiera de ellos, sin colas.</p></div>
+      <div class="locs" id="locs"></div>
+      <p style="text-align:center;margin-top:30px"><a class="btn osc" href="#contacto-locales">Contacto y locales</a></p>
+    </div>
+  </section>
+
+  <section class="bono" id="bono" data-bg="hero-salon">
+    <div class="wrap">
+      <span class="script">Regala Panadero</span>
+      <h2>Bonos regalo y encargos</h2>
+      <p>Un desayuno para dos, una tarta de cumpleaños o una bandeja para la oficina. Encárgalo con antelación y nosotros nos ocupamos de todo.</p>
+      <a class="btn" href="#bonos-regalo">Regalar un bono</a>
+    </div>
+  </section>
+
+  <section style="padding:70px 0 0">
+    <div class="wrap titulo" style="margin-bottom:24px"><span class="script">Síguenos</span><h2>@elpanaderodeeugui</h2></div>
+    <div class="insta">
+      <img data-img="napolitanas" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Napolitanas de chocolate en el mostrador">
+      <img data-img="tostadas" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Tostadas con tomate y queso y café">
+      <img data-img="magdalenas" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Magdalenas y palmeras en la vitrina">
+      <img data-img="cafe" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Café con leche en taza de porcelana azul">
+      <img data-img="bocadillos" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Bocadillos variados en la barra">
+      <img data-img="tostada-tomate" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Tostada de tomate con queso">
+    </div>
+  </section>
+</main>
+<!-- ===== PÁGINAS INTERIORES (textos de elpanaderodeeugui.com) ===== -->
+<style>
+.vista{display:none;background:var(--papel)}
+a.add,a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.vista.on{display:block}
+body.en-vista main.inicio{display:none}
+.v-cab{position:relative;min-height:340px;display:grid;align-items:end;color:var(--blanco);overflow:hidden;background:var(--negro)}
+.v-cab>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v-cab:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,13,.88) 0%,rgba(20,16,13,.45) 60%,rgba(20,16,13,.3) 100%)}
+.v-cab .wrap{position:relative;z-index:1;padding-top:70px;padding-bottom:44px;width:100%}
+.v-cab h1{font-size:clamp(34px,6vw,64px);margin:0}
+.v-cab .script{font-size:clamp(26px,3.6vw,40px);display:block;margin-top:4px}
+.volver{display:inline-block;margin-bottom:18px;color:#e6d7c1;text-decoration:none;font:500 13px Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.volver:hover{color:var(--oro)}
+.v-cuerpo{padding:70px 0}
+.v-dos{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.v-dos+.v-dos{margin-top:70px}
+.v-dos img{border-radius:var(--radio);box-shadow:var(--sombra);width:100%}
+.v-dos h2{font-size:clamp(24px,3vw,34px)}
+.v-dos .script{font-size:34px;display:block;line-height:1.1}
+.v-dos p{color:var(--texto-suave)}
+.v-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.v-ctas .btn.sec{color:var(--negro)}
+figure{margin:0}
+figcaption{font-size:14px;color:var(--texto-suave);font-style:italic;margin-top:8px}
+.hito{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:16px 0;border-top:1px solid #dccfb9}
+.hito b{font:600 30px Oswald;color:var(--oro)}
+.hito p{margin:0}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.v-oscura{background:var(--negro);color:var(--papel);padding:70px 0}
+.v-oscura p{color:#d9cdbb}
+.v-oscura h2{color:var(--papel)}
+.tarjetas{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tarj{background:var(--blanco);border-radius:var(--radio);overflow:hidden;display:flex;flex-direction:column}
+.tarj img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.tarj .c{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tarj h3{margin:0;font-size:20px}
+.tarj p{margin:0;color:var(--texto-suave);font-size:15px;flex:1}
+.tarj .acc{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.carta-res{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:10px}
+.carta-res section{background:var(--blanco);border-radius:var(--radio);padding:22px 24px}
+.carta-res h3{font-size:20px;color:var(--oro-osc);margin-bottom:10px}
+.fila-precio{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px dotted #cdbfa9;font-size:15px}
+.fila-precio span:last-child{font:600 15px Oswald;color:var(--negro);white-space:nowrap}
+.fila-precio small{display:block;color:var(--texto-suave);font-size:13px}
+.loc-grande{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.loc-grande article{background:var(--blanco);border-radius:var(--radio);overflow:hidden;display:grid;grid-template-columns:44% 1fr}
+.loc-grande img{width:100%;height:100%;object-fit:cover;min-height:200px}
+.loc-grande .c{padding:20px}
+.loc-grande h3{font-size:20px;margin-bottom:6px}
+.loc-grande p{margin:0 0 6px;color:var(--texto-suave);font-size:15px}
+.contacto-cab{text-align:center;margin-bottom:40px}
+.contacto-cab a{font:500 18px Oswald;letter-spacing:.08em;color:var(--oro-osc)}
+@media (max-width:980px){.v-dos,.carta-res,.loc-grande{grid-template-columns:1fr}.tarjetas{grid-template-columns:repeat(2,1fr)}.galeria{grid-template-columns:1fr 1fr}.v-dos.inv>:first-child{order:2}}
+@media (max-width:600px){.tarjetas,.galeria{grid-template-columns:1fr}.loc-grande article{grid-template-columns:1fr}.hito{grid-template-columns:1fr;gap:4px}.v-cuerpo{padding:50px 0}}
+</style>
+
+<!-- Productos -->
+<div class="vista" id="v-productos" data-titulo="Productos">
+  <section class="v-cab" style="padding:0"><img data-img="hero-pan" alt=""><div class="wrap"><a class="volver" href="#">← Inicio</a><h1>Productos</h1><span class="script">Mucho más que una panadería</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="tarjetas">
+      <article class="tarj"><img data-img="barras" alt="Barras de pan artesano en cestas de mimbre"><div class="c"><h3>Panadería</h3><p>Escoja entre nuestra oferta de panes siempre recién horneados.</p><div class="acc"><a class="add" href="#panaderia">Descúbralos</a><a class="add" href="pedidos.html?v=20261023b#pan" style="background:var(--oro)">Pedir</a></div></div></article>
+      <article class="tarj"><img data-img="capuchino" alt="Capuchino con canela"><div class="c"><h3>Cafetería</h3><p>Disfrute de un buen café o chocolate y acompáñelo con una de nuestras propuestas de dulces o salados.</p><div class="acc"><a class="add" href="#cafeteria">Visítenos</a><a class="add" href="pedidos.html?v=20261023b#desayunos" style="background:var(--oro)">Pedir</a></div></div></article>
+      <article class="tarj"><img data-img="cuajadas" alt="Postres caramelizados"><div class="c"><h3>Repostería</h3><p>El bocado dulce de cualquier celebración o, simplemente, porque le apetece.</p><div class="acc"><a class="add" href="#reposteria">Dése un placer</a><a class="add" href="pedidos.html?v=20261023b#reposteria" style="background:var(--oro)">Pedir</a></div></div></article>
+      <article class="tarj"><img data-img="pollo-asado" alt="Pollo asado"><div class="c"><h3>Comida para llevar</h3><p>Deje que nosotros le preparemos la comida. Dejará de cocinar.</p><div class="acc"><a class="add" href="#comida-para-llevar">Mire nuestra carta</a><a class="add" href="pedidos.html?v=20261023b#llevar" style="background:var(--oro)">Pedir</a></div></div></article>
+    </div>
+  </div></section>
+</div>
+
+<!-- Panadería -->
+<div class="vista" id="v-panaderia" data-titulo="Panadería">
+  <section class="v-cab" style="padding:0"><img data-img="hero-pan" alt=""><div class="wrap"><a class="volver" href="#productos">← Productos</a><h1>Panadería</h1><span class="script">Productos elaborados de forma artesanal para volver a disfrutar del placer de comer pan</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div><h2>Un pan que puedes oler, escuchar, sentir y degustar</h2>
+        <p>Solo al caminar por la terraza ya lo has sentido. Es un aroma especial, intenso y al mismo tiempo sutil; pero inconfundible.</p>
+        <p>Un obrador que nunca duerme, hornos y fogones, nuestro equipo, a pleno rendimiento, para que todas las mañanas, tardes y noches, puedas disfrutar de esa sensación, ese olor a pan recién hecho, ese tacto cálido y ese sabor a pan artesano y natural.</p></div>
+      <img data-img="barras" alt="Barras de pan artesano en cestas de mimbre">
+    </div>
+    <div class="v-dos inv">
+      <img data-img="hero-pan" alt="Cestas de pan de masa madre recién horneado">
+      <div><h2>Suave, crujiente y siempre recién hecho</h2>
+        <p>El Panadero de Eugui dispone de una variedad de panes hidratados, elaborados cuidadosamente uno a uno, mediante un proceso artesano.</p>
+        <p>Más de 10 variedades de pan hechos a partir de masa madre, que elaboramos cuidadosamente todos los días mediante un proceso artesano.</p>
+        <div class="v-ctas"><a class="btn" href="pedidos.html?v=20261023b#pan">Pide tu pan</a><a class="btn sec" href="#productos">Ver otros productos</a></div></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- Cafetería -->
+<div class="vista" id="v-cafeteria" data-titulo="Cafetería">
+  <section class="v-cab" style="padding:0"><img data-img="cafetera" alt=""><div class="wrap"><a class="volver" href="#productos">← Productos</a><h1>Cafetería</h1><span class="script">Una pausa para disfrutar de nuestros productos recién hechos, en un ambiente acogedor</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div><h2>Nuestro café se tuesta en casa</h2>
+        <p>Un gran salón estilo francés. De fondo suena ‘Apocalíptica’ de Anton Bruckner, o quizá sea otra obra de música clásica. Es un sonido tenue, sutil.</p>
+        <p>Eso sí, al acercarte a la entrada, miles de aromas, a pan y a café recién hecho se han agolpado ante ti, creando un mundo de sensaciones.</p>
+        <p>¿Lo reconoces? Es el momento.</p></div>
+      <img data-img="hero-salon" alt="Salón de la cafetería">
+    </div>
+    <div class="v-dos inv">
+      <img data-img="capuchino" alt="Capuchino con canela">
+      <div><span class="script">Oler, escuchar y sentir.</span><h2>Un lugar donde activar los sentidos, un espacio para compartir momentos</h2>
+        <p>Disfrutar de una rica taza de café natural recién tostado, chocolate, té, elaborados de manera natural, para degustar como prefieras, con algo dulce o quizá hoy algo salado, solo o en compañía, con la prensa del día o un buen libro.</p>
+        <p>Hace muchos años que en El Panadero de Eugui creamos un espacio pensado y diseñado para disfrutar de cada instante, como prefieras.</p>
+        <div class="v-ctas"><a class="btn" href="pedidos.html?v=20261023b#desayunos">Pide tu desayuno</a><a class="btn sec" href="#contacto-locales">Visítenos</a></div></div>
+    </div>
+    <div class="galeria"><img data-img="bocadillos" alt="Bocadillos"><img data-img="tostadas" alt="Tostadas con café"><img data-img="desayuno-jamon" alt="Desayuno con jamón"></div>
+  </div></section>
+</div>
+
+<!-- Repostería -->
+<div class="vista" id="v-reposteria" data-titulo="Repostería">
+  <section class="v-cab" style="padding:0"><img data-img="vitrina-dulces" alt=""><div class="wrap"><a class="volver" href="#productos">← Productos</a><h1>Repostería</h1><span class="script">Tartas, dulces, hojaldres, miniaturas, todo un placer para el paladar</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div><h2>La vida son momentos</h2>
+        <p>La vida son momentos, y queremos que los que viváis junto a nosotros sean los más dulces y deliciosos.</p>
+        <p>Toda nuestra repostería se elabora con materias primas de primera calidad. Mantequillas y natas, chocolate y cacao en la cantidad justa y con el trato y horneado más artesanal.</p>
+        <p>Nuestros obradores seleccionan los mejores ingredientes, buscan la mejor proporción de los mismos y crean con sus manos, pasteles, pastas, chocolates, dulces, tartas… exquisitos.</p>
+        <div class="v-ctas"><a class="btn" href="pedidos.html?v=20261023b#reposteria">Encarga tu tarta</a><a class="btn sec" href="pedidos.html?v=20261023b#bolleria">Bollería</a></div></div>
+      <img data-img="cuajadas" alt="Postres caramelizados vistos desde arriba">
+    </div>
+    <div class="galeria"><img data-img="napolitanas" alt="Napolitanas de chocolate"><img data-img="magdalenas" alt="Magdalenas y palmeras"><img data-img="vitrina-dulces" alt="Vitrina de dulces"></div>
+  </div></section>
+</div>
+
+<!-- Comida para llevar -->
+<div class="vista" id="v-comida-para-llevar" data-titulo="Comida para llevar">
+  <section class="v-cab" style="padding:0"><img data-img="pollo-asado" alt=""><div class="wrap"><a class="volver" href="#productos">← Productos</a><h1>Comida para llevar</h1><span class="script">Una amplia carta donde poder encargar tu celebración familiar o simplemente porque hoy no te apetece cocinar</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div><h2>Más de 40 años asando y horneando para usted</h2>
+        <p>La cocina es un arte que se sirve lentamente. El tiempo de cocina y asado es un requisito indispensable para que un plato sea perfecto.</p>
+        <p>Pero sabemos que el tiempo es oro. Quizá muchas veces no sois capaces de disponer de él para poder preparar la comida del día a día, una comida especial con familia, amigos, compañeros…</p>
+        <p>El Panadero de Eugui dispone de una amplia carta en la que podrá encontrar ricos platos tradicionales con productos de temporada así como una amplia variedad de ensaladas y raciones.</p></div>
+      <img data-img="asado-plato" alt="Asado con ensalada y patatas">
+    </div>
+    <div class="v-dos inv">
+      <img data-img="asado-ternera" alt="Asado con patatas panadera">
+      <div><h2>Menús y asados para llevar</h2>
+        <p>En el Panadero de Eugui, nos encargamos de todo para que organicéis una comida, y sólo os preocupéis de disfrutar con los vuestros.</p>
+        <p>Ponemos a tu disposición un servicio de asados completo, puedes traer tu propia carne para asarla en nuestros hornos de leña, o disfrutar de la que disponemos para ti. Asamos gorrín, cordero, cabrito, pollo, jamones, etc.</p>
+        <p>Nuestros cocinados pueden servir para complementar los asados: fritos, pasteles vegetales, pastas, legumbres, revueltos, verduras y arroces, entre otros. Aunque también disponemos de platos cocinados para el día a día, tanto de carne como de pescado.</p></div>
+    </div>
+  </div></section>
+  <section class="v-oscura"><div class="wrap">
+    <div class="titulo"><span class="script">Nuestra carta</span><h2>Menús, asados y cocinados</h2><div class="adorno"></div><p>Por la compra superior a 110 €, les regalamos una botella de Pagos de Araiz roble 2018.</p></div>
+    <div class="carta-res" id="cartaLlevar" style="color:var(--texto)"></div>
+    <p style="text-align:center;margin-top:16px;font-size:14px" id="notaLlevar"></p>
+    <div class="v-ctas" style="justify-content:center"><a class="btn" href="pedidos.html?v=20261023b#llevar">Haz tu pedido ahora</a></div>
+  </div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="titulo"><span class="script">Cocinamos con todo su sabor los productos de nuestra tierra</span><h2>Nuestros vinos 1927</h2><div class="adorno"></div></div>
+    <div class="v-dos">
+      <div><h3>1927 Crianza (Shiraz)</h3><p>Vino de color intenso púrpura, su primera capa muestra aromas de frutas silvestres negras donde destacan las moras y las grosellas. Seguidamente aparecen notas de los tostados de las barricas. Fundamentalmente marida con asados de todo tipo de carnes y cocina de vanguardia.</p>
+        <h3 style="margin-top:20px">1927 Blanco (Godello)</h3><p>De color amarillo verdoso con tonalidades nacaradas, en nariz resalta su intensidad aromática con tonalidades florales y de fruta blanca, de muy buena persistencia. En boca la entrada es alegre, joven y al final es largo. Marida perfectamente con pescado blanco, arroces y marisco.</p>
+        <p><small>Embotellados por Viña L’Ampara (Lodosa).</small></p></div>
+      <img data-img="vino" alt="Botella de vino 1927 en la bodega">
+    </div>
+  </div></section>
+</div>
+
+<!-- Nuestra historia -->
+<div class="vista" id="v-nuestra-historia" data-titulo="Nuestra historia">
+  <section class="v-cab" style="padding:0"><img data-img="hist-casa-baltasar" alt=""><div class="wrap"><a class="volver" href="#">← Inicio</a><h1>Nuestra historia</h1><span class="script">Un oficio de tradición</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div>
+        <span class="script">Desde 1927</span>
+        <h2>Javier Marticorena, un diez como trabajador y como padre de familia</h2>
+        <p>La historia del Panadero de Eugui comienza en 1927, en Casa Baltasar, fecha de la que tenemos constancia donde el abuelo José Marticorena, daba comidas, tenía comercio y un horno para hacer pan. En 1927 nació Javier Marticorena El Panadero de Eugui, quien con 20 años recupera la actividad de la panadería.</p>
+        <p>Fueron comienzos duros porque cada dos por tres había cortes de luz y entonces tenía que amasar a mano sobre una artesa. Una vez el pan ya hecho, se encargaba de repartirlo en bicicleta o en mulo por las bordas y casas del pueblo, un trabajo que realizaba con mucho esfuerzo y rompiendo muchas alpargatas.</p>
+      </div>
+      <figure><img data-img="hist-horno" alt="Javier Marticorena haciendo pan en el horno de Huarte"><figcaption>Javier Marticorena haciendo pan en el horno de Huarte (1984).</figcaption></figure>
+    </div>
+    <div style="margin-top:56px">
+      <div class="hito"><b>1927</b><p>En Casa Baltasar, el abuelo José Marticorena daba comidas, tenía comercio y un horno para hacer pan. Ese año nace Javier Marticorena, El Panadero de Eugui.</p></div>
+      <div class="hito"><b>1970</b><p>Tuvo que tomar una dura decisión: quedarse en el pueblo con bastante poco futuro, ya que el nuevo pantano en construcción anegaba Casa Baltasar y parte del pueblo, o salir de éste para buscar un futuro mejor. Se instaló con su familia en Huarte, un pueblo más grande y con más servicios, en la que se dio a conocer y donde durante ocho años trabajó y creó una pequeña empresa.</p></div>
+      <div class="hito"><b>1978</b><p>Cambió de domicilio a las afueras del pueblo, y durante 16 años desarrolló esta actividad con toda su ilusión.</p></div>
+      <div class="hito"><b>1995</b><p>El 10 de abril de 1995 murió después de toda una vida entregada a sus responsabilidades y a su ilusión por hacer las cosas bien. La empresa había crecido y dejó tras de sí una numerosa familia.</p></div>
+      <div class="hito"><b>Hoy</b><p>Fermín Marticorena continúa el trabajo de su abuelo y su padre.</p></div>
+    </div>
+    <div class="galeria">
+      <figure><img data-img="hist-bicicleta" alt="Repartiendo pan en bicicleta"><figcaption>Repartiendo pan por las bordas del pueblo de Eugui en bicicleta (1965).</figcaption></figure>
+      <figure><img data-img="hist-fermin" alt="Fermín Marticorena amasando"><figcaption>Fermín Marticorena continúa el trabajo de su abuelo y su padre.</figcaption></figure>
+      <figure><img data-img="hist-casa-baltasar" alt="Casa Baltasar en el antiguo pueblo de Eugui" style="aspect-ratio:800/582;object-fit:cover"><figcaption>Casa Baltasar, casa natal de Javier Marticorena en el antiguo pueblo de Eugui, hoy anegada por las aguas del pantano.</figcaption></figure>
+    </div>
+    <div class="v-ctas" style="justify-content:center;margin-top:40px"><a class="btn" href="pedidos.html?v=20261023b#pan">Pide pan recién hecho</a><a class="btn sec" href="#contacto-locales">Nuestros locales</a></div>
+  </div></section>
+</div>
+
+<!-- Contacto / Locales -->
+<div class="vista" id="v-contacto-locales" data-titulo="Contacto y locales">
+  <section class="v-cab" style="padding:0"><img data-img="local-carlos3" alt=""><div class="wrap"><a class="volver" href="#">← Inicio</a><h1>Contacto / Locales</h1><span class="script">Venga a visitarnos a nuestros locales de Pamplona y Huarte</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="contacto-cab"><p style="margin:0 0 4px">Correo</p><a href="mailto:info@elpanaderodeeugui.com">info@elpanaderodeeugui.com</a><p style="margin:14px 0 0">Pedidos: <a href="pedidos.html?v=20261023b">Hacer pedido online</a> · de 10:00 a 20:30, de lunes a domingo</p></div>
+    <div class="loc-grande" id="locsGrande"></div>
+  </div></section>
+</div>
+
+<!-- Bonos regalo -->
+<div class="vista" id="v-bonos-regalo" data-titulo="Bonos regalo">
+  <section class="v-cab" style="padding:0"><img data-img="hero-salon" alt=""><div class="wrap"><a class="volver" href="#">← Inicio</a><h1>Bonos regalo y encargos</h1><span class="script">Regala Panadero</span></div></section>
+  <section class="v-cuerpo"><div class="wrap">
+    <div class="v-dos">
+      <div><h2>Un detalle que sabe a pan recién hecho</h2>
+        <p>Un desayuno para dos, una tarta de cumpleaños o una bandeja para la oficina. Encárgalo con antelación y nosotros nos ocupamos de todo.</p>
+        <p>Los bonos se canjean en cualquiera de nuestros locales.</p>
+        <div class="v-ctas"><a class="btn" href="pedidos.html?v=20261023b#regalo">Regalar un bono</a><a class="btn sec" href="pedidos.html?v=20261023b#reposteria">Encargar una tarta</a></div></div>
+      <img data-img="desayuno-jamon" alt="Desayuno con tostada de jamón y café">
+    </div>
+  </div></section>
+</div>
+
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img data-img="logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Panadero de Eugui" style="height:70px;margin-bottom:14px">
+      <p>Negocio familiar dedicado al pan, la repostería y la comida cocinada para llevar desde 1927.</p>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <p><a href="mailto:info@elpanaderodeeugui.com">info@elpanaderodeeugui.com</a><br>Pedidos: <a href="pedidos.html?v=20261023b">Hacer pedido online</a><br>Asador: de 10:00 a 20:30, de lunes a domingo</p>
+    </div>
+    <div>
+      <h3>Pide online</h3>
+      <p><a href="pedidos.html?v=20261023b">Hacer pedido</a><br><a href="#productos">Productos</a><br><a href="#nuestra-historia">Nuestra historia</a><br><a href="#contacto-locales">Locales</a><br><a href="#bonos-regalo">Bonos regalo</a><br><a href="https://www.instagram.com/elpanaderodeeugui/" rel="noopener">Instagram</a></p>
+    </div>
+    <details style="grid-column:1/-1;font-size:12.5px;color:#9d8f7c"><summary style="cursor:pointer">Créditos de fotos</summary><p id="creditos" style="margin:8px 0 0"></p></details>
+    <div class="legal"><span>© 2026 El Panadero de Eugui · Todos los derechos reservados</span><span><a href="legal.html#aviso-legal">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a> · <a href="legal.html#cookies">Cookies</a> · <a href="legal.html#condiciones">Condiciones de venta</a> · <a href="legal.html#alergenos">Alérgenos</a></span></div>
+  </div>
+</footer>
+
+<script src="imagenes.js?v=20261023b"></script>
+<script src="carta.js?v=20261023b"></script>
+<script src="clientes.js?v=20261023b"></script>
+<script>document.querySelectorAll('[data-img]').forEach(i=>i.src=IMG[i.dataset.img]);document.querySelectorAll('[data-bg]').forEach(e=>e.style.setProperty('--bg','url('+IMG[e.dataset.bg]+')'));</script>
+<script>
+/* Portada: los botones de pedido llevan a pedidos.html?v=20261023b, cada uno a su sección de la carta */
+const $ = id => document.getElementById(id);
+function toggleMenu(b){const m=$('menu');m.classList.toggle('on');b.setAttribute('aria-expanded',m.classList.contains('on'))}
+function irInicio(){scrollTo(0,0)}
+function irSeccion(id){$('menu').classList.remove('on');$(id).scrollIntoView()}
+function abrirPedido(cat){ location.href = 'pedidos.html?v=20261023b' + (cat ? '#'+cat : ''); }
+function abrirCarrito(){ location.href = 'pedidos.html?v=20261023b#cesta'; }
+
+function tarjeta(p){
+  let pie;
+  if (p.o) pie = `<span class="precio">desde ${eur(Math.min(...p.o.map(o=>o.p)))}</span><button class="add" onclick="abrirPedido('${p.cat}')">Elegir</button>`;
+  else { const q=cesta[p.id]||0;
+    pie = `<span class="precio">${eur(p.p)}</span>` + (q
+      ? `<span class="cant"><button aria-label="Quitar uno de ${esc(p.n)}" onclick="mod('${p.id}',-1)">−</button><span aria-label="${q} en la cesta">${q}</span><button aria-label="Añadir otro ${esc(p.n)}" onclick="mod('${p.id}',1)">+</button></span>`
+      : `<button class="add" onclick="mod('${p.id}',1)">Añadir</button>`); }
+  return `<article class="prod"><img src="${img(p.img)}" alt="${esc(p.n)}" loading="lazy"><div class="c"><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p><div class="pie">${pie}</div></div></article>`;
+}
+function pintarDestacados(){ $('destacados').innerHTML = PRODUCTOS.filter(p=>p.top).slice(0,4).map(tarjeta).join(''); }
+function pintarLocales(){
+  $('locs').innerHTML = LOCALES.map(l=>`<article class="loc"><img src="${img(l.img)}" alt="Local de ${esc(l.nombre)}" loading="lazy"><div class="c"><h3>${esc(l.nombre)}</h3><p>${esc(l.dir)}</p>${l.tel?`<p><a href="tel:+34${l.tel.replace(/\s/g,'')}">Tel. ${l.tel}</a></p>`:''}<a class="add" style="margin-top:10px;display:inline-block;text-decoration:none" href="pedidos.html?v=20261023b&local=${l.id}">Recoger aquí</a></div></article>`).join('');
+}
+function pintarCesta(){ $('nCesta').textContent = nCesta(); }
+function mod(id,d){ sumar(id,d); pintarDestacados(); pintarCesta(); }
+
+cargaLista.then(()=>{ pintarDestacados(); pintarLocales(); pintarCesta(); pintarCartaLlevar(); pintarLocalesGrande(); });
+
+/* ---------- Páginas interiores dentro de la portada (#nuestra-historia, #productos…) ---------- */
+const VISTAS=['productos','panaderia','cafeteria','reposteria','comida-para-llevar','nuestra-historia','contacto-locales','bonos-regalo'];
+const tituloBase=document.title;
+function rutear(){
+  const h=decodeURIComponent(location.hash.slice(1));
+  const v=VISTAS.includes(h)?h:null;
+  document.querySelectorAll('.vista').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  document.body.classList.toggle('en-vista',!!v);
+  $('menu').classList.remove('on');
+  document.querySelectorAll('nav.menu a').forEach(a=>a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+v));
+  if(v){ document.title=$('v-'+v).dataset.titulo+' · Panadero de Eugui'; scrollTo({top:0,behavior:'instant'}); }
+  else { document.title=tituloBase; if(!h) scrollTo({top:0,behavior:'instant'}); }
+}
+window.addEventListener('hashchange',rutear);
+function pintarCartaLlevar(){
+  const grupos=[['Menús para llevar',p=>p.sub==='Menús para llevar'],['Asados',p=>p.sub==='Asados'],['Cocinados',p=>(p.sub||'').startsWith('Cocinados')],['Guarniciones y tortillas',p=>p.sub==='Guarniciones y tortillas']];
+  $('cartaLlevar').innerHTML=grupos.map(([t,f])=>`<section><h3>${t}</h3>${PRODUCTOS.filter(p=>p.cat==='llevar'&&f(p)).map(p=>p.o
+    ? p.o.map(o=>`<div class="fila-precio"><span>${esc(p.n)}<small>${esc(o.n)}</small></span><span>${eur(o.p)}</span></div>`).join('')
+    : `<div class="fila-precio"><span>${esc(p.n)}${t==='Menús para llevar'?`<small>${esc(p.d)}</small>`:''}</span><span>${eur(p.p)}</span></div>`).join('')}</section>`).join('');
+  $('notaLlevar').textContent='(*) '+NOTAS_LLEVAR;
+}
+function pintarLocalesGrande(){
+  $('locsGrande').innerHTML=LOCALES.map(l=>`<article><img src="${img(l.img)}" alt="Local de ${esc(l.nombre)}" loading="lazy"><div class="c"><h3>${esc(l.nombre)}</h3><p>${esc(l.dir)}</p>${l.tel?`<p><a href="tel:+34${l.tel.replace(/\s/g,'')}">Tel. ${l.tel}</a></p>`:''}<div class="acc" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><a class="add" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Panadero de Eugui '+l.dir)}" target="_blank" rel="noopener">Cómo llegar</a><a class="add" style="background:var(--oro)" href="pedidos.html?v=20261023b&local=${l.id}">Recoger aquí</a></div></div></article>`).join('');
+}
+rutear();
+$('creditos').textContent=CREDITOS_FOTOS;
+window.addEventListener('pageshow', ()=>{ try{ cesta = JSON.parse(localStorage.getItem('eugui_cesta')||'{}')||{}; }catch(e){} pintarDestacados(); pintarCesta(); });
+</script>
+</body>
+</html>
